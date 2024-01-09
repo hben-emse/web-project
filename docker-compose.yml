@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  frontend:
+    build: ./vue-3-crud
+    ports:
+      - "${FRONTEND_EXT_PORT}:${FRONTEND_INT_PORT}"
+    environment:
+      - API_URL="http://backend:${BACKEND_INT_PORT}"
+      - PORT=${FRONTEND_INT_PORT}
+
+  backend:
+    build: ./spring-boot-h2-database-crud
+    ports:
+      - "${BACKEND_EXT_PORT}:${BACKEND_INT_PORT}"
+    environment:
+      - SERVER_PORT=${BACKEND_INT_PORT}
